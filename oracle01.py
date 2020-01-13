@@ -18,8 +18,8 @@ print(data)
 
 sql = '''
     INSERT INTO MEMBER(ID,PW,NAME,AGE,JOINDATE)
-    VALUE(:1, :2, :3, :4, SYSDATE)
+    VALUES(:1, :2, :3, :4, SYSDATE)
     '''
-arr = ['a11', 'a1', '홍길동', 33]
+arr = ['a12', 'a1', '홍길동', 33]
 cursor.execute(sql, arr)
 conn.commit()
