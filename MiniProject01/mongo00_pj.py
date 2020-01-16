@@ -48,4 +48,33 @@ for i in range(10,51,10):
         for tmp in range(0,len(tag1),1):
             print(tmp.text.split("\n"))
             
-33333333333
+
+            
+            
+###준호###
+from selenium import webdriver
+import time
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
+
+options.add_argument("disable-gpu")   
+options.add_argument("lang=ko_KR")    
+options.add_argument('user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36')  # user-agent 
+
+driver = webdriver.Chrome('./chromedriver.exe', 
+    options=options)
+
+driver.get("https://datalab.naver.com/keyword/realtimeList.naver?age={}s&datetime=2020-01-14T12%3A56%3A00#none")
+
+time.sleep(3)
+
+
+
+tag = driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/div[2]/div[2]/div') \
+    .find_elements_by_tag_name("li")
+
+
+#tag = driver.find_element_by_class_name('list_wrap.typeRealtime').find_elements_by_tag_name("li")
+
+for tmp in tag:
+    print(tmp.text.split("\n"))
