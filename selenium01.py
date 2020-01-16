@@ -23,15 +23,10 @@ driver.find_element_by_name("pw").send_keys('20191216')
 driver.find_element_by_css_selector('#form1 > div:nth-child(4) > input').click() 
     # by_css_selector('#포함!! copy selector한값').click()  
 
-#xpath : //*[@id="form1"]/div[3]/input
+# xpath : //*[@id="form1"]/div[3]/input
 
 time.sleep(3)
 driver.execute_script('alert("hello")')
-
-# 예시
-# a = [{"ret":1,"ret1":{"b":[13,45],"bbb":[23,34],"ccc":[56,67]}}]
-# 1? 67? 
-# a[2] 
 
 '''
 driver.get("http://daum.net") # 1st로그인 이후의 페이지

@@ -33,7 +33,6 @@ options.add_argument('user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6)
 
 driver=webdriver.Chrome('./chromedriver.exe',chrome_options=options)
 
-
 for i in range(10,51,10):
     #for j in [10,19]:
         driver.get("https://datalab.naver.com/keyword/realtimeList.naver?age={}s&datetime=2020-01-14T12%3A56%3A00#none".format(i))
