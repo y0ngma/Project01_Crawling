@@ -18,7 +18,6 @@ for line in rdr:
     print(dict1)
     coll.insert_one(dict1)
 
-
 # for line in rdr:
 #     dict1 = dict()    
 #     for idx, val in enumerate(line):

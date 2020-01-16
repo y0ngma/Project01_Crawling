@@ -8,7 +8,9 @@ cursor = conn.cursor()
 
 url     = "http://ihongss.com/json/exam2.json"
 str1    = requests.get(url).text # 0101.. 문자열로 오므로 json타입이 아니다. 변환 필요.
-data1   = json.loads(str1) # (file에서 읽을때는 load) str->dict은 loads
+data1   = json.loads(str1)
+    # file에서 읽을때는 load
+    # str->dict은 loads
 
 # sql = '''
 #     INSERT INTO MEMBER(ID, PW, NAME, AGE, JOINDATE)

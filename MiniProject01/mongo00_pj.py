@@ -43,7 +43,7 @@ for i in range(10,51,10):
         tag1=driver.find_element_by_class_name('item_num')
         tag2=driver.find_element_by_class_name('item_title')
         #######방법2#################################
-        tag=driver.find_elements_by_tag_name("span")
+        # tag=driver.find_elements_by_tag_name("span")
 
 
         for tmp in range(0,len(tag1),1):
