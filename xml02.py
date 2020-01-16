@@ -1,13 +1,7 @@
 from xml.etree.ElementTree import parse 
-# import requests
-from urllib.request import urlopen 
-# from xml.etree.ElementTree import urlopen
+from urllib.request import urlopen
 
-#url     = urlopen('http://ihongss.com/xml/exam1.xml')
 url     = 'http://ihongss.com/xml/exam1.xml'
-# str    = requests.get(url)
-# doc     = parse(str.text)
-
 str1    = urlopen(url)
 doc1    = parse(str1)
 print(doc1)
