@@ -1,3 +1,4 @@
+# API 용 파일 확장자
 from xml.etree.ElementTree import parse
 
 doc     = parse('./resources/exam1.xml')
