@@ -16,6 +16,7 @@ driver.get("https://datalab.naver.com/shoppingInsight/sCategory.naver")
 time.sleep(3) # 3초 스크립트 정보가져오도록 기다리기
 tag = driver.find_element_by_class_name('rank_top1000_list') \
     .find_elements_by_tag_name("li")
-
+    # print(tmp.find("a").text) # -> 가나다
+    # <a href='#', id='aaa'>가나다< /a>
 for tmp in tag:
     print(tmp.text.split("\n")) 

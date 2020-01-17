@@ -6,7 +6,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # C:\Project_git\Project01_Crawling
-print(os.path.join(BASE_DIR, 'abc'))
+print(os.path.join(BASE_DIR))
 # C:\Project_git\Project01_Crawling\abc
 
 options = webdriver.ChromeOptions()
