@@ -14,6 +14,7 @@ options.add_argument("disable-gpu")
 options.add_argument("lang=ko_KR")    
 options.add_argument('user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36')  # user-agent 
 driver=webdriver.Chrome('./chromedriver.exe', chrome_options=options)
+<<<<<<< HEAD
 url="https://datalab.naver.com/keyword/realtimeList.naver?datetime=2018-12-01T00%3A00%3A00"
 driver.get(url)
 
@@ -23,6 +24,13 @@ driver.get(url)
 # 시간정보 00시로 초기화    
 # 다음날 클릭
 
+=======
+
+url="https://datalab.naver.com/keyword/realtimeList.naver?datetime=2018-12-01T00%3A00%3A00"
+    # 12.01.00.00
+driver.get(url)
+
+>>>>>>> 7b5e8706ab6bb69f97deb75b53512ff7d6c42fe8
 day=driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/div/div[1]/a[3]/span[1]')
     # 날짜정보xxxx-xx-xx로 만들기
 tmp1 = day.text[:-5]
@@ -31,9 +39,16 @@ dbtitle = '-'.join(tmp2)
 print(dbtitle)
 coll=db.get_collection(dbtitle)
 
+<<<<<<< HEAD
 
 time.sleep(1) 
     # 화면바뀔때마다 클릭 전 시간주기
+=======
+time.sleep(1) 
+    # 화면바뀔때마다 클릭 전 시간주기
+driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/div/div[1]/a[2]').click()
+    # 다음 날짜 클릭
+>>>>>>> 7b5e8706ab6bb69f97deb75b53512ff7d6c42fe8
 tag=driver.find_elements_by_class_name('rank_inner')
     # rank_inner 이름의 요소들 모두 담아
 
@@ -63,7 +78,11 @@ conn.close()
 # 테이블명 날짜로 xxxx-xx-xx
 # 검색어 컬럼에 순위빼서 넣기
 # 전체순위 빼고 50대 까지
+<<<<<<< HEAD
 # 다음날 순위 
 
 # 다음 날짜 클릭
 driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/div/div[1]/a[2]').click()
+=======
+# 다음날 순위 
+>>>>>>> 7b5e8706ab6bb69f97deb75b53512ff7d6c42fe8
