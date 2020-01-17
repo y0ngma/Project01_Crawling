@@ -1,10 +1,7 @@
 from selenium import webdriver
 import time
-
-
 import pymongo
 import cx_Oracle as oci
-
 import requests
 import json
 
@@ -24,12 +21,10 @@ driver.get(url)
 tag=driver.find_element_by_class_name('ranking_box').find_elements_by_tag_name('li')
 time.sleep(3)
 
-
 #######몽고에 저장하기################
 conn=pymongo.MongoClient('192.168.99.100',32766)
 db=conn.get_database("team") 
 coll=db.get_collection("p20200116") #collection생성
-
 
 rank=list()
 word=list()
