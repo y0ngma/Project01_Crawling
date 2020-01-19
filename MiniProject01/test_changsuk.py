@@ -1,7 +1,6 @@
 from selenium import webdriver
 import time
 import pymongo
-import cx_Oracle as oci
 import requests
 import json
 
