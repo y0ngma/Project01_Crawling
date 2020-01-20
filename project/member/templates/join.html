@@ -1,0 +1,41 @@
+<!--주석문-->
+<!--단축키는 ctrl ?-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>join</title>
+</head>
+<body>
+    <h3>회원가입</h3>
+    <hr />  
+    
+    <form action="/member/join" method="post"> 
+        아이디  : <input type="text" name="id" /><br />
+        암호    : <input type="password" name='pw'/><br />
+        암호확인: <input type="password" /><br />
+        이름    : <input type="text" name = "name"/><br />
+        나이    : <input type="number" name = "age"/><br />
+        <input type="submit" value="회원가입" />
+    </form>
+    <form action='/member/index' method='get'>
+        <input type='submit' value='홈' />
+    </form>
+    
+{% if not request.session.userid %}
+    <a href='/member/list'>회원목록</a>
+    <a href='/member/login'>로그인</a>
+    <a href='/member/join'>회원가입</a>
+{% else %}
+    {{request.session.username}}
+    <a href='/member/list'>회원목록</a>
+    <a href='/member/edit'>회원정보수정</a>
+    <form action='/member/delete' method='post'>
+        <input type='submit' value='회원탈퇴' />
+    </form>
+    <a href='/member/logout'>로그아웃</a>
+{% endif %}
+</body>
+</html>

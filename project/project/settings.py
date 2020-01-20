@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'board', 
-
+    'member',
 
 
 ]
@@ -79,26 +79,26 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        ## sqlite DB 사용시
-            # 'ENGINE': 'django.db.backends.sqlite3',
-            # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        
-        ## mysql
-            # 'ENGINE'   : 'django.db.backends.mysql',
-            # 'NAME'     : 'DB명',
-            # 'PASSWORD' : '암호',
-            # 'USER'     : '아이디명',
-            # 'HOST'     : '127.0.0.1',
-            # 'PORT'     : '포트번호'
+    ## sqlite DB 사용시
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    
+    ## mysql
+        # 'ENGINE'   : 'django.db.backends.mysql',
+        # 'NAME'     : 'DB명',
+        # 'PASSWORD' : '암호',
+        # 'USER'     : '아이디명',
+        # 'HOST'     : '127.0.0.1',
+        # 'PORT'     : '포트번호'
 
-        ## oracle
-            'ENGINE'   : 'django.db.backends.oracle',
-            'NAME'     : 'xe', # SID(db명)
-            'PASSWORD' : '1234',
-            'USER'     : 'admin',
-            'HOST'     : '192.168.99.100',
-            'PORT'     : '32764'
-        } 
+    ## oracle
+        'ENGINE'   : 'django.db.backends.oracle',
+        'NAME'     : 'xe', # SID(db명)
+        'PASSWORD' : '1234',
+        'USER'     : 'admin',
+        'HOST'     : '192.168.99.100',
+        'PORT'     : '32764'
+    } 
 }
 
 
