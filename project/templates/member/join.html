@@ -10,7 +10,7 @@
     <h3>회원가입</h3>
     <hr />  
     
-    <form action="/member/join" method="post"> 
+    <form action="/member/join" method="post"> {% csrf_token %}
         아이디  : <input type="text" name="id" /><br />
         암호    : <input type="password" name='pw'/><br />
         암호확인: <input type="password" /><br />
