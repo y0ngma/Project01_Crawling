@@ -3,9 +3,13 @@ import time
 import pymongo
 import requests
 import json
-
-conn=pymongo.MongoClient('192.168.99.100',32766)#몽고 연결
-db=conn.get_database('team') 
+import cx_Oracle as oci
+###########오라클 연결##############
+conn_o = oci.connect('admin/1234@192.168.99.100:32764/xe', encoding='utf-8')
+cursor = conn_o.cursor()
+############몽고 연결###############
+conn_m=pymongo.MongoClient('192.168.99.100',32766)#몽고 연결
+db=conn_m.get_database('team') 
 coll=db.get_collection('all')
 
 ######웹을 불러서 값얻어내기#######################
@@ -69,8 +73,23 @@ for d in range (1,32,1):
 
             
             print(dbname,time2,'완료')
+            data1 = coll.find({}, {'_id':False})
+
+            for tmp in data1:
+                # print(tmp)
+                sql='''
+                INSERT INTO TABLE1(NO, AGE, RANK, WORD, YEAR, MONTH, DAY, TIME)
+                VALUES(SEQ_TABLE1_NO.nextval, :age, :rank, :word, :year, :month, :day, :time)
+                '''
+
+
+                cursor.execute(sql, tmp)
+                conn_o.commit()
+            print('oracle db 추가 완료')
+
 
         except:
             pass            
 
-conn.close()        
+conn_m.close()       
+conn_o.close() # 오라클 연결 끊기
