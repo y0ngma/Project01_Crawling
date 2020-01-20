@@ -28,7 +28,7 @@ conf=db.get_collection('conf')
 
 if not conf.find_one():
     dict1=dict()
-    dict1['date']='2019.01.01'
+    dict1['date']='2019.02.7'
     conf.insert_one(dict1)
 
 date1=conf.find_one()['date']
