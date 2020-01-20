@@ -71,13 +71,19 @@ while True:
             print(age)           
         print('한살더')        
     print('한시간더')
-        
+    dd=conf.find_one()['date']
+    yesterday = date.fromtimestamp(time.time() - 60*60*24)
+    dty = yesterday.strftime('%Y.%m.%d')
+    if dd==dty:
+        break         
+    
     driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/div[1]/div[1]/div/div/div/div[1]/a[2]').click()
 
     date1=driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/div[1]/div[1]/div/div/div/div[1]/a[3]/span[1]')
     date1=date1.text[0:10]
     print(date1)
     dd=conf.find_one()['date']
+
     if date1==dd:
         break
     k=conf.find_one()['_id']

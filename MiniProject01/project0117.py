@@ -51,11 +51,7 @@ for i in tag:
 
 conn.close()
 
-try:
-    #https://datalab.naver.com/keyword/realtimeList.naver?age=10s&datetime=2018-10-10T06%3A00%3A00
-    pass
-except expression as identifier:
-    pass
+
 
 """
 for y in ['2019','2018','2017']:
