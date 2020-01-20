@@ -1,14 +1,17 @@
+<!-- 기본 구조 => 헤더, 네비, 푸터 삽입   -->
 <!DOCTYPE html>
 <html lang="en">
-{%      include './head.html'      %}
+<!-- head.html -->
+{% include "../main/head.html" %}
+
+<!-- main body -->
 <body>
-{%      include './menu.html'      %}    
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Home</h1>
-    <p class="lead">Quickly build an effective pricing
-            table for your potential customers with this
-            Bootstrap example. It’s built with default Bootstrap
-            components and utilities with little customization.</p>
-</div>
+<!-- nav.html -->
+{% include "../main/nav.html" %}
+    <div class="container-md pt-5">
+        
+    <!-- footer.html -->
+    {% include "../main/footer.html" %}
+    </div>
 </body>
 </html>
