@@ -10,14 +10,14 @@ conn_m=pymongo.MongoClient('192.168.99.100',32766)#몽고 연결
 db=conn_m.get_database('team') 
 coll=db.get_collection('ppp')
 
-data1 = coll.find({}, {'_id':False})
+data1 = coll.find({}, {'_id':False}) # 빼고자 하는 컬럼'_id' 
 
 for tmp in data1:
-    print(type(tmp),tmp)
+    print(type(tmp), tmp)
 
     sql='''
         INSERT INTO BOARD_BOARD1(GENE, RANK, WORD, YEAR, MONTH, DAY, TIME)
-        VALUES(SEQ_BOARD_BOARD1_NO.nextval, :age, :rank, :word, :year, :month, :day, :time)
+        VALUES(:age, :rank, :word, :year, :month, :day, :time)
     '''
     cursor.execute(sql, tmp)
     conn_o.commit()
