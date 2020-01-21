@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widtd=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>내용</title>
+    <link  rel="stylesheet" href="/static/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div style="margin-top:5px; margin-bottom: 5px;">
+            <h3>글내용</h3>
+        </div>
+        <table class="table">
+            <tr>
+                <th class="bg-light" style='width:100px'>글번호</th>
+                <td>{{ one.0 }}</td>
+            </tr>
+            <tr>
+                <th class="bg-light">제목</th>
+                <td>{{ one.1 }}</td>
+            </tr>
+            
+            <tr>
+                <th class="bg-light">내용</th>
+                <td>
+                    <!-- on->off하면 지저분한게 없어진다 -->
+                    {% autoescape off %}
+                    {{ one.2 | linebreaksbr }}
+                    {% endautoescape %}
+                </td>
+            </tr>
+
+            <tr>
+                <th class="bg-light">이미지</th>
+                <td>
+                    <!-- <img src = '/static/img/workout.jpg'> -->
+                    <img src='data:     ;base64,    {{image}}' width='300px'>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="bg-light">작성자</th>
+                <td>{{ one.3 }}</td>
+            </tr>
+            <tr>
+                <th class="bg-light">조회수</th>
+                <td>{{ one.4 }}</td>
+            </tr>            
+            <tr>
+                <th class="bg-light">날짜</th>
+                <td>{{ one.5 }}</td>
+            </tr>            
+        </table>
+        <td>  
+            <a href="/board/list" class="btn btn-info">목록으로</a>
+            
+            {% if prv != 0 %}
+            <a href="/board/content?no={{prv}}" class="btn btn-info">이전글</a>
+            {% else        %}
+            <a href="#" class="btn btn-secondary disabled">이전글</a>
+            {% endif       %}
+            {% if nxt != 0  %}
+            <a href="/board/content?no={{nxt}}" class="btn btn-info">다음글</a>
+            {% else         %}
+            <a href="#" class="btn btn-secondary disabled">다음글</a>
+            {% endif        %}
+            
+            {% if first != request.GET.no %}
+            <a href="/board/content?no={{first}}" class="btn btn-info">처음글</a>
+            {% else        %}
+            <a href="#" class="btn btn-secondary disabled">처음글번호:{{request.GET.no}}</a>
+            {% endif       %}
+
+
+            {% if last != request.GET.no %}
+            <a href="/board/content?no={{last}}" class="btn btn-info">최신글</a>
+            {% else         %}
+            <a href="#" class="btn btn-secondary disabled">최신글번호:{{request.GET.no}}</a>
+            {% endif        %}
+            
+            <a href="/board/edit?no={{one.0}}" class="btn btn-success">글수정</a>
+            <a href="/board/delete?no={{one.0}}" class="btn btn-danger">글삭제</a>
+        </td>      
+    </div>
+</body>
+</html>

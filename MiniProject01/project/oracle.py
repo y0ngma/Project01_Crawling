@@ -16,7 +16,7 @@ for tmp in data1:
     print(type(tmp),tmp)
 
     sql='''
-        INSERT INTO BOARD_BOARD1(NO, GENE, RANK, WORD, YEAR, MONTH, DAY, TIME)
+        INSERT INTO BOARD_BOARD1(GENE, RANK, WORD, YEAR, MONTH, DAY, TIME)
         VALUES(SEQ_BOARD_BOARD1_NO.nextval, :age, :rank, :word, :year, :month, :day, :time)
     '''
     cursor.execute(sql, tmp)
