@@ -57,7 +57,7 @@ while True:
         url="https://datalab.naver.com/keyword/realtimeList.naver?datetime={:4s}-{:2s}-{:2s}T{:0>2d}%3A00%3A00".format(year,mon,day,h)
             ###########################################################################################################################
         driver.get(url)
-        time.sleep(1)
+        time.sleep(1.5)
         # 2, 1일 증가
         driver.find_element_by_xpath('//*[@id="content"]/div/div[3]/div/a[2]/span').click()#옆으로 한칸 클릭(50대이상 보이게)
         day1=driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/div/div[1]/a[3]/span[1]')#날짜 변수        
