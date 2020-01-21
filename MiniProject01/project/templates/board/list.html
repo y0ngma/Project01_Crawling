@@ -1,51 +1,32 @@
-<!-- 기본 구조 => 헤더, 네비, 푸터 삽입   -->
 <!DOCTYPE html>
 <html lang="en">
 <!-- head.html -->
 {% include "../main/head.html" %}
-
 <!-- main body -->
 <body>
 <!-- nav.html -->
 {% include "../main/nav.html" %}
-    <h3>Member list</h3>
-    <hr />
-{{tuple}}
+    
+<hr />
+<h3>Member list</h3>
 
 <hr />
-{% for one in list %}
-    {{one.0}}
-{% endfor %}
+<h3>Member list</h3>
 
+{{tuple}}
 <hr />
 
 {{list}}
-    <!-- {% for one in tuple %}
-        {{one.0}}
-        {{one.1}}
-        {{one.2}}
-        {{one.3}}
-        {{one.4}}
-        <br />
-    {% endfor %}
+<hr />
+<!-- 
+{% for one in list %}
+    {{one.0}}
+{% endfor %} -->
 
-        <hr />
-        <h3>VIP Membership</h3>
-    {% for one in list %}
-        {{one.0}}
-        {{one.1}}
-        {{one.2}}
-        {{one.3}}
-        {{one.4}}
-        {{one.5}}
-        {{one.6}}
-        <br />
-    {% endfor %} -->
-
+    <hr />
     <form action='/board/service3' method='get'>
-    <input type='submit' value='service3' />
+        <input type='submit' value='service3' /></form>
     <form action='/board/service4' method='get'>
-    <input type='submit' value='service4' />
-    </form>
+        <input type='submit' value='service4' /></form>
 </body>
 </html>

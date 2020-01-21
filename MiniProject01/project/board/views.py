@@ -13,15 +13,14 @@ def service3(request):
 
             print(type(yr), yr)        
             sql = '''
-                SELECT
-                    RANK,WORD,YEAR,MONTH
-                FROM 
-                    BOARD_BOARD1
-                WHERE
-                    RANK = 1 AND YEAR = %s AND NO < 101
+            SELECT WORD FROM BOARD_TABLE1
+            WHERE NO IN (
+                SELECT NO FROM BOARD_TABLE1 WHERE NO <= 40) 
+                AND RANK = 1 AND YEAR = %s  
             '''
-            cursor.execute(sql, yr)
+            cursor.execute(sql, [yr])
             data = cursor.fetchall()
+
 
         except Exception as e:
             print( '================error===')
@@ -39,7 +38,7 @@ def service4(request):
    
 @csrf_exempt
 def list(request): 
-    sql = 'SELECT RANK FROM BOARD_BOARD1 WHERE NO <40 GROUP BY RANK'
+    sql = 'SELECT RANK FROM BOARD_BOARD1 WHERE NO <40 AND RANK=1 GROUP BY RANK'
     cursor.execute(sql)
     data = cursor.fetchall()
     print(type(data))
@@ -50,8 +49,12 @@ def list(request):
         # 단 title키의 값은 하나뿐이라 list.html에서 {{title}}가능하고
         # list키의 값은 회원수만큼이므로 for문 사용했음
     
-    # sql = 'SELECT WORD FROM BOARD_BOARD1 WHERE RANK=1'
-    sql = 'SELECT DAY FROM BOARD_BOARD1 WHERE NO <40'
+    sql = '''
+        SELECT WORD FROM BOARD_BOARD1
+        WHERE NO IN (
+            SELECT NO FROM BOARD_BOARD1 WHERE NO <= 40) 
+            AND RANK = 1 
+        '''
     cursor.execute(sql)
     data2 = cursor.fetchall()
     print(type(data2))
