@@ -10,22 +10,22 @@ def service3(request):
     if request.method == 'GET':
     # html에서 dropdown 메뉴에서 보내줄 get name값 리스트    
         GN = ["10대","20대","30대","40대","50대이상"]
-        MM = [i for i in range(1,13)]
-        DD = [i for i in range(1,32)]
-        SS = [i for i in range(0,24)]
+        MM = [int(i) for i in range(1,13)]
+        DD = [int(i) for i in range(1,32)]
+        SS = [int(i) for i in range(0,24)]
     # 필터값 설정. 받아온 get name값 담기
-        gn1  = request.GET.get('gene', '10대')
-        gn1  = "%" +gn1+ "%"
-        yy1  = request.GET.get('year', 2019)
-        yy2  = request.GET.get('year', 2019)
-        mm1  = request.GET.get('month', 7)
-        mm2  = request.GET.get('month', 7)
-        dd1  = request.GET.get('day', 1)
-        dd2  = request.GET.get('day', 1)
-        ss1  = request.GET.get('time', 4)
-        ss2  = request.GET.get('time', 5)
-        rk1  = request.GET.get('rank', 1)
-        rk2  = request.GET.get('rank', 1)
+        gn1  = request.GET.get('gene', '10대')#10+20+30+40+50?
+        gn1  = "%" +gn1+ "%" #year1, 2로 구분필요?
+        yy1  = int(request.GET.get('year', 2019))
+        yy2  = int(request.GET.get('year', 2019))
+        mm1  = int(request.GET.get('month', 7))
+        mm2  = int(request.GET.get('month', 7))
+        dd1  = int(request.GET.get('day', 1))
+        dd2  = int(request.GET.get('day', 1))
+        ss1  = int(request.GET.get('time', 4))
+        ss2  = int(request.GET.get('time', 5))
+        rk1  = int(request.GET.get('rank', 1))
+        rk2  = int(request.GET.get('rank', 1))
     # 필터링 시작점
         filters = [gn1,yy1,yy2,mm1,mm2,dd1,dd2,ss1,ss2,rk1,rk2]
         print("=====================필터1===========",filters)
@@ -53,6 +53,21 @@ def service3(request):
             GROUP BY WORD
             ORDER BY COUNT(*) DESC
             '''
+    #    
+        # sql = '''
+        #     SELECT WORD,COUNT(*) FROM (
+        #         SELECT WORD FROM BOARD_BOARD1
+        #         WHERE NO IN (SELECT NO FROM BOARD_BOARD1 WHERE NO < 10000) AND
+        #             GENE LIKE %s AND 
+        #             (YEAR  >= %s AND YEAR  <= %s) AND
+        #             (MONTH >= %s AND MONTH <= %s) AND
+        #             (DAY   >= %s AND DAY   <= %s) AND 
+        #             (TIME  >= %s AND TIME  <= %s) AND 
+        #             (RANK  >= %s AND RANK  <= %s)
+        #         )
+        #     GROUP BY WORD
+        #     ORDER BY COUNT(*) DESC
+        #     '''
         cursor.execute(sql)
         data2 = cursor.fetchall()
         print(type(data2))

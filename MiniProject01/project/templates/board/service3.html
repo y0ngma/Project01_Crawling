@@ -69,16 +69,36 @@
                     value='필터' />
             </form>
         </div>
+    
+        <font size ='2em'>
+        <table >
+            <tr>
+                {{filters.0}}
+            </tr>
+            <tr>
+                <td>검색시작일</td>
+                {% for one in filters %}
+                <td>{{one.1}}</td>
+                <td>{{one.3}}</td>
+                <td>{{one.5}}</td>
+                <td>{{one.7}}</td>
+                <td>{{one.9}}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>검색종료일</td>
+                {% for one in filters %}
+                <td>{{one.2}}</td>
+                <td>{{one.4}}</td>
+                <td>{{one.6}}</td>
+                <td>{{one.8}}</td>
+                <td>{{one.10}}</td>
+                {% endfor %}
+            </tr>
+        </table>       
+        </font>
 
-        filters = [gn1,yy1,yy2,mm1,mm2,dd1,dd2,ss1,ss2,rk1,rk2]
-
-{% for one in filtered%}        
-<td>
-    <a href="/board/service3?gene={{one.0}}">{{one.0}}</a>
-</td>
-{% endfor %}
-
-            <table border='1' class = 'table'>
+            <table border='4' class = 'table'>
                 <tr>
                     <th>검색어</th>
                     <th>검색횟수</th>
