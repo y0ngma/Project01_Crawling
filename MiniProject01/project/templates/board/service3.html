@@ -4,16 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>년간키워드</title>
+    <title>리스트</title>
+    
+    <link  rel="stylesheet" href="/static/css/bootstrap.min.css" />
 </head>
 <body>
-  
-    {{yrwd}}
+    <div class='container'>
+    <h3> 연간 검색어 집계 </h3>
+    <hr />
+        <div class="form-inline row justify-content-end" 
+            style="margin-top:5px; margin-bottom: 5px;">
+            <form action='/board/service3' method='get'>
+                <select class ='form-control' name='gene'>
+                    {% for i in GN %}
+                    <option value='{{i}}'>{{i}}</option>
+                    {% endfor %}
+                </select> &nbsp;
+                검색시작일
+                <select class ='form-control' name='year'>
+                    <option value='2019'>2019</option>
+                    <option value='2020'>2020</option>
+                </select> &nbsp;
+                <select class ='form-control' name='month'>
+                    {% for i in MM %}
+                    <option value='{{i}}'>{{i}}월</option>
+                    {% endfor %}
+                </select> &nbsp;
+                <select class ='form-control' name='day'>
+                    {% for i in DD %}
+                    <option value='{{i}}'>{{i}}일</option>
+                    {% endfor %}
+                </select> &nbsp;
+                <select class ='form-control' name='time'>
+                    {% for i in SS %}
+                    <option value='{{i}}'>{{i}}시</option>
+                    {% endfor %}
+                </select> &nbsp;
+                
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색종료일
+
+                    <select class ='form-control' name='year'>
+                        <option value='2019'>2019</option>
+                        <option value='2020'>2020</option>
+                    </select> &nbsp;
+                    <select class ='form-control' name='month'>
+                        {% for i in MM %}
+                        <option value='{{i}}'>{{i}}월</option>
+                        {% endfor %}
+                    </select> &nbsp;
+                    <select class ='form-control' name='day'>
+                        {% for i in DD %}
+                        <option value='{{i}}'>{{i}}일</option>
+                        {% endfor %}
+                    </select> &nbsp;
+                    <select class ='form-control' name='time'>
+                        {% for i in SS %}
+                        <option value='{{i}}'>{{i}}시</option>
+                        {% endfor %}
+                    </select> &nbsp;
+                <input type ='submit'class='btn btn-secondary'
+                    value='필터' />
+            </form>
+        </div>
+
+        filters = [gn1,yy1,yy2,mm1,mm2,dd1,dd2,ss1,ss2,rk1,rk2]
+
+{% for one in filtered%}        
+<td>
+    <a href="/board/service3?gene={{one.0}}">{{one.0}}</a>
+</td>
+{% endfor %}
+
+            <table border='1' class = 'table'>
+                <tr>
+                    <th>검색어</th>
+                    <th>검색횟수</th>
+                </tr>
+                {% for one in ctwd %}
+                <tr>
+                    
+                    <td><a href="#">{{one.0}}</a></td>
+                    <td>{{one.1}}</td>
+                
+                </tr>  
+                {% endfor %}  
+            </table>
+        </form>
     
-
-
-    <form action='/board/list' method='get'>
-        <input type='submit' value='list' />
-    </form>
+    <!-- footer.html -->
+    {% include "../main/footer.html" %}
+    </div>
 </body>
 </html>
+
+<a class="page-link" 
+href="/board/service3?page={{i}}&txt={{request.GET.txt}}">{{i}}</a>
+<a href="/board/service3?writer={{one.2}}">{{one.2}}</a>
+service3?gene=10%EB%8C%80&year=2019&month=1&day=1&time=0http://127.0.0.1:8000/board/service3?gene=20%EB%8C%80&year=2019&month=1&day=1&time=0
+service3?gene=20%EB%8C%80&year=2019&month=1&day=1&time=0
+service3?gene=50%EB%8C%80%EC%9D%B4%EC%83%81&year=2019&month=1&day=1&time=0

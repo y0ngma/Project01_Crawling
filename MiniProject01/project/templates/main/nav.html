@@ -7,7 +7,7 @@
     <a class="p-2 text-dark" href="/member/login">Login</a>
     <a class="btn btn-outline-primary" href="/member/join">Sign up</a>
     <a class="btn btn-outline-success" href="/board/list">list</a>
-    <a class="btn btn-outline-success" href="/board/t2_list">t2_list</a>
+    <a class="btn btn-outline-success" href="/member/m_list">m_list</a>
     {% else %}
     <a class="p-2 text-dark" href="/member/delete">delete</a>
             <form action="/member/delete" methode="post">
@@ -40,8 +40,8 @@
       {% comment %} <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Dropdown</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="/board/list">list</a>
-          <a class="dropdown-item" href="/board/t2_list">t2_list</a>
+          <a class="dropdown-item" href="/board/list">board_list</a>
+          <a class="dropdown-item" href="/member/list">member_list</a>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li> {% endcomment %}
@@ -56,7 +56,7 @@
     <a href="/member/join" class="btn btn-success mr-sm-1"> Sign Up </a>
     <a href="/member/login" class="btn btn-success mr-sm-2"> Sign In </a>
     <a class="btn btn-outline-success mr-sm-2" href="/board/list">list</a>
-    <a class="btn btn-outline-success mr-sm-2" href="/board/t2_list">t2_list</a>
+    <a class="btn btn-outline-success mr-sm-2" href="/member/list">m_list</a>
     {% else %}
     <a class="btn btn-success mr-sm-1" href="/member/delete">delete</a>
             <form action="/member/delete" methode="post">

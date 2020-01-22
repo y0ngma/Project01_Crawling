@@ -8,24 +8,93 @@ from .models import board1
 @csrf_exempt
 def service3(request):
     if request.method == 'GET':
-        try:
-            yr = request.GET.get('year', 2020)
-
-            print(type(yr), yr)        
-            sql = '''
-            SELECT WORD FROM BOARD_TABLE1
-            WHERE NO IN (
-                SELECT NO FROM BOARD_TABLE1 WHERE NO <= 40) 
-                AND RANK = 1 AND YEAR = %s  
+    # html에서 dropdown 메뉴에서 보내줄 get name값 리스트    
+        GN = ["10대","20대","30대","40대","50대이상"]
+        MM = [i for i in range(1,13)]
+        DD = [i for i in range(1,32)]
+        SS = [i for i in range(0,24)]
+    # 필터값 설정. 받아온 get name값 담기
+        gn1  = request.GET.get('gene', '10대')
+        gn1  = "%" +gn1+ "%"
+        yy1  = request.GET.get('year', 2019)
+        yy2  = request.GET.get('year', 2019)
+        mm1  = request.GET.get('month', 7)
+        mm2  = request.GET.get('month', 7)
+        dd1  = request.GET.get('day', 1)
+        dd2  = request.GET.get('day', 1)
+        ss1  = request.GET.get('time', 4)
+        ss2  = request.GET.get('time', 5)
+        rk1  = request.GET.get('rank', 1)
+        rk2  = request.GET.get('rank', 1)
+    # 필터링 시작점
+        filters = [gn1,yy1,yy2,mm1,mm2,dd1,dd2,ss1,ss2,rk1,rk2]
+        print("=====================필터1===========",filters)
+        sql = '''
+        SELECT WORD FROM BOARD_BOARD1
+        WHERE NO IN (SELECT NO FROM BOARD_BOARD1 WHERE NO < 10000) AND
+            GENE LIKE %s AND 
+            (YEAR  >= %s AND YEAR  <= %s) AND
+            (MONTH >= %s AND MONTH <= %s) AND
+            (DAY   >= %s AND DAY   <= %s) AND 
+            (TIME  >= %s AND TIME  <= %s) AND 
+            (RANK  >= %s AND RANK  <= %s)
+        '''
+        cursor.execute(sql, filters)
+        filtered = cursor.fetchall()
+        print("=====================필터된 값=============",filtered)
+        
+    # 카운터
+        sql = '''
+            SELECT WORD,COUNT(*) FROM (
+                SELECT WORD FROM BOARD_BOARD1
+                WHERE NO IN (SELECT NO FROM BOARD_BOARD1 WHERE NO <= 10000) 
+                AND RANK = 1   
+                )
+            GROUP BY WORD
+            ORDER BY COUNT(*) DESC
             '''
-            cursor.execute(sql, [yr])
-            data = cursor.fetchall()
+        cursor.execute(sql)
+        data2 = cursor.fetchall()
+        print(type(data2))
+        print("========================",data2)
+
+        return render(request,'board/service3.html',{'GN':GN,'MM':MM,\
+            "DD":DD,"SS":SS,'filtered':filtered,"filters":filters,'ctwd':data2})
+   
 
 
-        except Exception as e:
-            print( '================error===')
-            data = '에러'
-        return render(request, 'board/service3.html', {'yrwd':data})
+@csrf_exempt
+def list(request): 
+    
+    w=request.GET.get('search', "")
+    sql="""
+        SELECT YEAR, MONTH, DAY, TIME FROM BOARD_BOARD1
+        WHERE NO IN (SELECT NO FROM BOARD_BOARD1 WHERE NO <= 1000) 
+        ORDER BY YEAR, MONTH, DAY, TIME ASC
+        """
+    cursor.execute(sql)
+    data=cursor.fetchall()
+    time1=data[0]
+    time2=data[-1]
+    print(time1, time2)
+
+    sql = '''
+        SELECT WORD,COUNT(*) FROM (
+            SELECT WORD FROM BOARD_BOARD1
+            WHERE NO IN (SELECT NO FROM BOARD_BOARD1 WHERE NO <= 1000) 
+            AND RANK = 1   
+            )
+        GROUP BY WORD
+        ORDER BY COUNT(*) DESC
+        '''
+    cursor.execute(sql)
+    data2 = cursor.fetchall()
+    print(type(data2))
+    print(data2)
+
+
+    return render(request,'board/list.html',{'start':time1, 'end':time2, 'ctwd':data2})
+       
 
 @csrf_exempt
 def service4(request):
@@ -35,30 +104,3 @@ def service4(request):
 
         return render(request, 'board/service4.html', {'word':data})        
         # return redirect('/board/service4') 
-   
-@csrf_exempt
-def list(request): 
-    sql = 'SELECT RANK FROM BOARD_BOARD1 WHERE NO <40 AND RANK=1 GROUP BY RANK'
-    cursor.execute(sql)
-    data = cursor.fetchall()
-    print(type(data))
-    print(data)
-        # [(, , , ,column렬의 수 만큼 ), (row 행의 수 만큼)]
-        # list.html으로 넘어갈때
-        # list 변수에 data값을, title변수에 회원목록 문자로 해서 넘긴다.
-        # 단 title키의 값은 하나뿐이라 list.html에서 {{title}}가능하고
-        # list키의 값은 회원수만큼이므로 for문 사용했음
-    
-    sql = '''
-        SELECT WORD FROM BOARD_BOARD1
-        WHERE NO IN (
-            SELECT NO FROM BOARD_BOARD1 WHERE NO <= 40) 
-            AND RANK = 1 
-        '''
-    cursor.execute(sql)
-    data2 = cursor.fetchall()
-    print(type(data2))
-    print(data2)
-
-    return render(request, 'board/list.html', {'tuple':data, 'list':data2})
-
