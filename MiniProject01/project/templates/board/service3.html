@@ -40,29 +40,39 @@
                     <option value='{{i}}'>{{i}}시</option>
                     {% endfor %}
                 </select> &nbsp;
+                <select class ='form-control' name='rank'>
+                    {% for i in RK %}
+                    <option value='{{i}}'>{{i}}위</option>
+                    {% endfor %}
+                </select> &nbsp;
                 
                     <br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색종료일
 
-                    <select class ='form-control' name='year'>
+                    <select class ='form-control' name='year2'>
                         <option value='2019'>2019</option>
                         <option value='2020'>2020</option>
                     </select> &nbsp;
-                    <select class ='form-control' name='month'>
+                    <select class ='form-control' name='month2'>
                         {% for i in MM %}
                         <option value='{{i}}'>{{i}}월</option>
                         {% endfor %}
                     </select> &nbsp;
-                    <select class ='form-control' name='day'>
+                    <select class ='form-control' name='day2'>
                         {% for i in DD %}
                         <option value='{{i}}'>{{i}}일</option>
                         {% endfor %}
                     </select> &nbsp;
-                    <select class ='form-control' name='time'>
+                    <select class ='form-control' name='time2'>
                         {% for i in SS %}
                         <option value='{{i}}'>{{i}}시</option>
+                        {% endfor %}
+                    </select> &nbsp;
+                    <select class ='form-control' name='rank2'>
+                        {% for i in RK %}
+                        <option value='{{i}}'>{{i}}위</option>
                         {% endfor %}
                     </select> &nbsp;
                 <input type ='submit'class='btn btn-secondary'
@@ -103,7 +113,7 @@
                     <th>검색어</th>
                     <th>검색횟수</th>
                 </tr>
-                {% for one in ctwd %}
+                {% for one in filtered %}
                 <tr>
                     
                     <td><a href="#">{{one.0}}</a></td>
