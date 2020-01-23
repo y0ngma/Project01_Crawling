@@ -19,26 +19,24 @@ def service3(request):
         RK = [int(i) for i in range(1,21)]
 
         GN = ["10대","20대","30대","40대","50대이상"]
-
-        print("AA")
-        a = ["0","1","2","3"]
-        print(a)
-        b = ["0","1","2","3","4","5","6","7","8","9"]
+        a = list('0123')
+        b = list('0123456789')
         serial= [i+j for i in a for j in b]
         MM = serial[1:13]
         # DD = serial[1:32]
         # SS = serial[:24]
-        # RK = [str(i) for i in range(1,21)]
     
-        # 필터값 설정. 받아온 get name값 담기
+    # 필터값 설정. 받아온 get name값 담기
         rk1  = int(request.GET.get('rank', 1))
         rk2  = int(request.GET.get('rank2', 1))
 
-        gn1  = request.GET.get('gene', '30대') #10+20+30+40+50?
+        gn1  = request.GET.get('gene', '10대') #10+20+30+40+50?
         gn1  = "%" +gn1+ "%"
 
         yy1  = str(request.GET.get('year', 2019))
         yy2  = str(request.GET.get('year2', 2020))
+        mm1  = str(request.GET.get('month', "01"))
+        mm2  = str(request.GET.get('month2', "01"))
 
         dd1  = str(request.GET.get('day', "1"))
         if len(dd1) < 2 :
@@ -56,8 +54,6 @@ def service3(request):
         if len(ss2) < 2  :
             ss2 = "0" + ss2
 
-        mm1  = str(request.GET.get('month', "01"))
-        mm2  = str(request.GET.get('month2', "01"))
         
         filters=[gn1,int(yy1+mm1+dd1+ss1),int(yy2+mm2+dd2+ss2),rk1,rk2]
    
@@ -88,26 +84,19 @@ def service3(request):
    
 
 @csrf_exempt
-def list(request): # 검색어 최초검색된 날짜, 최종일
-    # w=request.GET.get('search', "")
-    sql="""
-        SELECT YEAR, MONTH, DAY, TIME FROM BOARD_BOARD1
-        WHERE NO IN (SELECT NO FROM BOARD_BOARD1 WHERE NO <= 1000)
-           
-        ORDER BY YEAR, MONTH, DAY, TIME ASC
-        """
-    cursor.execute(sql)
-    data=cursor.fetchall()
-    time1=data[0]
-    time2=data[-1]
-    
-    return render(request,'board/list.html',{'start':time1,'end':time2})
-       
-@csrf_exempt
-def service4(request):
+def service4(request): # 검색어 최초검색된 날짜, 최종일
     if request.method == 'GET':
-        
-        data = '키워드'
-
-        return render(request, 'board/service4.html', {'word':data})        
-        # return redirect('/board/service4') 
+        w=request.GET.get('search', "")
+        sql="""
+            SELECT YEAR, MONTH, DAY, TIME FROM BOARD_BOARD1
+            WHERE NO IN (SELECT NO FROM BOARD_BOARD1 WHERE NO <= 1000)AND
+                WORD = %s
+            ORDER BY YEAR, MONTH, DAY, TIME ASC
+            """
+        cursor.execute(sql)
+        data=cursor.fetchall()
+        time1=data[0]
+        time2=data[-1]
+    
+        return render(request,'board/service4.html',{'start':time1,'end':time2})
+  

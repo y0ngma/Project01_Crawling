@@ -7,8 +7,11 @@
     <title>리스트</title>
     
     <link  rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
 </head>
 <body>
+
+    <div id="piechart"></div>
 <div class='container'>
 <h3> 연간 검색어 집계 </h3>
 <hr />
@@ -88,16 +91,15 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종료범위
 
             <select class ='form-control' name='year2'>
-                {% if request.GET.year2 == '2019' %}
-                <option value='2019'selected>2019</option>
-                {% else %}
-                <option value='2019'>2019</option>
-                {% endif %}
-
                 {% if request.GET.year2 == '2020' %}
                 <option value='2020'selected>2020</option>
                 {% else %}
                 <option value='2020'>2020</option>
+                {% endif %}
+                {% if request.GET.year2 == '2019' %}
+                <option value='2019'selected>2019</option>
+                {% else %}
+                <option value='2019'>2019</option>
                 {% endif %}
             </select> &nbsp;
 
@@ -159,16 +161,41 @@
         {% endfor %}  
     </table>
     </form>
-
-<!-- footer.html -->
-{% include "../main/footer.html" %}
 </div>
+
+<script src="https://d3js.org/d3.v3.min.js">
+</script>     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js">
+</script> 
+<script>
+    var pieData = {        
+        사과1: 500,
+        호두: 200,
+        블루베리: 666,
+        치즈: 54,
+        딸기: 120
+      };
+      var chartDonut = c3.generate({
+        bindto: "#piechart",
+        data: {
+          json: [pieData],
+          keys: {
+            value: Object.keys(pieData),
+          },
+          type: "donut",
+        },
+        donut: {
+          title: "상위 검색어 비율",
+        },
+      });
+      
+      var chartDonutColors = chartDonut.data.colors();
+      $("#text-apple").css("color", chartDonutColors["사과"]);
+      $("#text-walnut").css("color", chartDonutColors["호두"]);
+      $("#text-berry").css("color", chartDonutColors["블루베리"]);
+      $("#text-cheese").css("color", chartDonutColors["치즈"]);
+      $("#text-strawberry").css("color", chartDonutColors["딸기"]);
+</script>
+
 </body>
 </html>
-
-<a class="page-link" 
-href="/board/service3?page={{i}}&txt={{request.GET.txt}}">{{i}}</a>
-<a href="/board/service3?writer={{one.2}}">{{one.2}}</a>
-service3?gene=10%EB%8C%80&year=2019&month=1&day=1&time=0http://127.0.0.1:8000/board/service3?gene=20%EB%8C%80&year=2019&month=1&day=1&time=0
-service3?gene=20%EB%8C%80&year=2019&month=1&day=1&time=0
-service3?gene=50%EB%8C%80%EC%9D%B4%EC%83%81&year=2019&month=1&day=1&time=0
