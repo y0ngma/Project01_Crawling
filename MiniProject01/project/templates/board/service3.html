@@ -9,124 +9,160 @@
     <link  rel="stylesheet" href="/static/css/bootstrap.min.css" />
 </head>
 <body>
-    <div class='container'>
-    <h3> 연간 검색어 집계 </h3>
-    <hr />
-        <div class="form-inline row justify-content-end" 
-            style="margin-top:5px; margin-bottom: 5px;">
-            <form action='/board/service3' method='get'>
-                <select class ='form-control' name='gene'>
-                    {% for i in GN %}
-                    <option value='{{i}}'>{{i}}</option>
-                    {% endfor %}
-                </select> &nbsp;
-                검색시작일
-                <select class ='form-control' name='year'>
-                    <option value='2019'>2019</option>
-                    <option value='2020'>2020</option>
-                </select> &nbsp;
-                <select class ='form-control' name='month'>
-                    {% for i in MM %}
-                    <option value='{{i}}'>{{i}}월</option>
-                    {% endfor %}
-                </select> &nbsp;
-                <select class ='form-control' name='day'>
-                    {% for i in DD %}
+<div class='container'>
+<h3> 연간 검색어 집계 </h3>
+<hr />
+    <div class="form-inline row justify-content-end" 
+        style="margin-top:5px; margin-bottom: 5px;">
+        <form action='/board/service3' method='get'>
+            
+            <select class ='form-control' name='gene'>
+            {% for i in GN %}
+                {% if i == request.GET.gene %}
+                <option value='{{i}}' selected>{{i}}</option>
+                {% else %}
+                <option value='{{i}}'>{{i}}</option>
+                {% endif %}
+            {% endfor %}
+            </select> &nbsp;
+            
+            시작범위
+            <select class ='form-control' name='year'>
+                {% if request.GET.year == '2019' %}
+                <option value='2019'selected>2019</option>
+                {% else %}
+                <option value='2019'>2019</option>
+                {% endif %}
+
+                {% if request.GET.year == '2020' %}
+                <option value='2020'selected>2020</option>
+                {% else %}
+                <option value='2020'>2020</option>
+                {% endif %}
+            </select> &nbsp;
+            
+            
+            <select class ='form-control' name='month'>
+            {% for i in MM %}
+                {% if i == request.GET.month %}
+                <option value='{{i}}' selected>{{i}}월</option>
+                {% else %}
+                <option value='{{i}}'>{{i}}월</option>
+                {% endif %}
+            {% endfor %}
+            </select> &nbsp;
+            
+            <select class ='form-control' name='day'>
+                {% for i in DD %}
+                    {% if i|stringformat:"i" == request.GET.day %}
+                    <option value='{{i}}' selected>{{i}}일</option>
+                    {% else %}
                     <option value='{{i}}'>{{i}}일</option>
-                    {% endfor %}
-                </select> &nbsp;
-                <select class ='form-control' name='time'>
-                    {% for i in SS %}
+                    {% endif %}
+                {% endfor %}
+            </select> &nbsp;
+            
+            <select class ='form-control' name='time'>
+                {% for i in SS %}
+                    {% if i|stringformat:"i" == request.GET.time %}
+                    <option value='{{i}}' selected>{{i}}시</option>
+                    {% else %}
                     <option value='{{i}}'>{{i}}시</option>
-                    {% endfor %}
-                </select> &nbsp;
-                <select class ='form-control' name='rank'>
-                    {% for i in RK %}
+                    {% endif %}
+                {% endfor %}
+            </select> &nbsp;
+            
+            <select class ='form-control' name='rank'>
+                {% for i in RK %}
+                    {% if i|stringformat:"i" == request.GET.rank %}
+                    <option value='{{i}}' selected>{{i}}위</option>
+                    {% else %}
                     <option value='{{i}}'>{{i}}위</option>
-                    {% endfor %}
-                </select> &nbsp;
-                
-                    <br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색종료일
-
-                    <select class ='form-control' name='year2'>
-                        <option value='2019'>2019</option>
-                        <option value='2020'>2020</option>
-                    </select> &nbsp;
-                    <select class ='form-control' name='month2'>
-                        {% for i in MM %}
-                        <option value='{{i}}'>{{i}}월</option>
-                        {% endfor %}
-                    </select> &nbsp;
-                    <select class ='form-control' name='day2'>
-                        {% for i in DD %}
-                        <option value='{{i}}'>{{i}}일</option>
-                        {% endfor %}
-                    </select> &nbsp;
-                    <select class ='form-control' name='time2'>
-                        {% for i in SS %}
-                        <option value='{{i}}'>{{i}}시</option>
-                        {% endfor %}
-                    </select> &nbsp;
-                    <select class ='form-control' name='rank2'>
-                        {% for i in RK %}
-                        <option value='{{i}}'>{{i}}위</option>
-                        {% endfor %}
-                    </select> &nbsp;
-                <input type ='submit'class='btn btn-secondary'
-                    value='필터' />
-            </form>
-        </div>
-    
-        <font size ='2em'>
-        <table >
-            <tr>
-                {{filters.0}}
-            </tr>
-            <tr>
-                <td>검색시작일</td>
-                {% for one in filters %}
-                <td>{{one.1}}</td>
-                <td>{{one.3}}</td>
-                <td>{{one.5}}</td>
-                <td>{{one.7}}</td>
-                <td>{{one.9}}</td>
+                    {% endif %}
                 {% endfor %}
-            </tr>
-            <tr>
-                <td>검색종료일</td>
-                {% for one in filters %}
-                <td>{{one.2}}</td>
-                <td>{{one.4}}</td>
-                <td>{{one.6}}</td>
-                <td>{{one.8}}</td>
-                <td>{{one.10}}</td>
-                {% endfor %}
-            </tr>
-        </table>       
-        </font>
+            </select> &nbsp;
+            
+            <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종료범위
 
-            <table border='4' class = 'table'>
-                <tr>
-                    <th>검색어</th>
-                    <th>검색횟수</th>
-                </tr>
-                {% for one in filtered %}
-                <tr>
-                    
-                    <td><a href="#">{{one.0}}</a></td>
-                    <td>{{one.1}}</td>
-                
-                </tr>  
-                {% endfor %}  
-            </table>
+            <select class ='form-control' name='year2'>
+                {% if request.GET.year2 == '2019' %}
+                <option value='2019'selected>2019</option>
+                {% else %}
+                <option value='2019'>2019</option>
+                {% endif %}
+
+                {% if request.GET.year2 == '2020' %}
+                <option value='2020'selected>2020</option>
+                {% else %}
+                <option value='2020'>2020</option>
+                {% endif %}
+            </select> &nbsp;
+
+            <select class ='form-control' name='month2'>
+                {% for i in MM %}
+                    {% if i == request.GET.month2 %}
+                    <option value='{{i}}' selected>{{i}}월</option>
+                    {% else %}
+                    <option value='{{i}}'>{{i}}월</option>
+                    {% endif %}
+                {% endfor %}
+            </select> &nbsp;
+            
+            <select class ='form-control' name='day2'>
+                {% for i in DD %}
+                    {% if i|stringformat:"i" == request.GET.day2 %}
+                    <option value='{{i}}' selected>{{i}}일</option>
+                    {% else %}
+                    <option value='{{i}}'>{{i}}일</option>
+                    {% endif %}
+                {% endfor %}
+            </select> &nbsp;
+            
+            <select class ='form-control' name='time2'>
+                {% for i in SS %}
+                    {% if i|stringformat:"i" == request.GET.time2 %}
+                    <option value='{{i}}' selected>{{i}}시</option>
+                    {% else %}
+                    <option value='{{i}}'>{{i}}시</option>
+                    {% endif %}
+                {% endfor %}
+            </select> &nbsp;
+            
+            <select class ='form-control' name='rank2'>
+                {% for i in RK %}
+                    {% if i|stringformat:"i" == request.GET.rank2 %}
+                    <option value='{{i}}' selected>{{i}}위</option>
+                    {% else %}
+                    <option value='{{i}}'>{{i}}위</option>
+                    {% endif %}
+                {% endfor %}
+            </select> &nbsp;
+            
+            <input type ='submit'class='btn btn-secondary' value='필터' />
         </form>
-    
-    <!-- footer.html -->
-    {% include "../main/footer.html" %}
     </div>
+
+    <table border='4' class = 'table'>
+        <tr>
+            <th>검색어</th>
+            <th>검색횟수</th>
+        </tr>
+        
+        {% for one in filtered %}
+        <tr>
+            <td><a href="#">{{one.0}}</a></td>
+            <td>{{one.1}}</td>
+        </tr>  
+        {% endfor %}  
+    </table>
+    </form>
+
+<!-- footer.html -->
+{% include "../main/footer.html" %}
+</div>
 </body>
 </html>
 
