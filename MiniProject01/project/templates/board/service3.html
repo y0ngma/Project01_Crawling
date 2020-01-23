@@ -163,18 +163,31 @@
     </form>
 </div>
 
-<script src="https://d3js.org/d3.v3.min.js">
-</script>     
-<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js">
-</script> 
+
+<script src="https://d3js.org/d3.v3.min.js"></script>     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script> 
 <script>
-    var pieData = {        
+
+    var str1= '{{chart}}';
+
+    str1 = str1.replace(/&#39;/gi, "\"");
+    console.log(str1)
+    
+    var pieData = eval(str1)
+    console.log(pieData)
+
+    //var obj = JSON.parse(str1);
+    //console.log(obj)
+
+    /*
+     var pieData = {        
         사과1: 500,
         호두: 200,
         블루베리: 666,
         치즈: 54,
         딸기: 120
       };
+      */
       var chartDonut = c3.generate({
         bindto: "#piechart",
         data: {

@@ -80,7 +80,7 @@ def service3(request):
         print("=====================필터된 값=======",filtered)
         print("=====================필터1===========",filters)
         return render(request,'board/service3.html',{'GN':GN,'MM':MM,\
-            "DD":DD,"SS":SS,"RK":RK,'filtered':filtered})
+            "DD":DD,"SS":SS,"RK":RK,'filtered':filtered,"chart": {'사과1': 500,  '호두': 200,        '블루베리': 666,        '치즈': 54,        '딸기': 120     }})
    
 
 @csrf_exempt
