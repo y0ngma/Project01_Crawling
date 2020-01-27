@@ -1,0 +1,40 @@
+{% include './header.html' %}
+<body>
+{% include './menu.html' %}
+<link href="/static/css/carousel.css" rel="stylesheet">
+
+  <form class="form-inline mt-2 mt-md-0" action = "/board/search1" method = 'get'>
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name='search'>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+      Search</button>
+  </form>
+    txt=""
+    {% for one in data %}  
+    txt = txt + {{one.0}} 
+    {% endfor %}
+    <div id="vis">
+    txt
+    </div>
+  
+
+<script src="/static/js/d3.min.js"></script>
+<script src="/static/js/cloud.min.js"></script>
+<script async src="/static/js/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+window.google_analytics_uacct = "UA-54563-3";
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-54563-3']);
+_gaq.push(['_trackPageview']);
+setTimeout(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+}, 1);
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+{% include './footer.html' %}
+
+
+</body>
+</html>

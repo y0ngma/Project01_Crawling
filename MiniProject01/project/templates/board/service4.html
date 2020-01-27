@@ -1,18 +1,187 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>service4</title>
-</head>
+{% include './header.html' %}
 <body>
-{{word}}
+{% include './menu.html' %}
+
+<table class="table">
+<div class="container-fluid">
+<td colspan="7" align="center" bgcolor="blue" height="40" style="color:white">
+<div class="alert alert-success" role="alert"><h5>*********검색어키워드*********</h5></div>
+</div>
+</table>
+    
+    <MARQUEE scrolldelay="5">
+    {% for i in li %}
+      {{i.0}}
+    {% endfor %}
+    </MARQUEE>
+
+    <!-- 스크롤의 속도-->
+
+    <form action="/board/service4" method="GET">
+      <table class="table">
+        <tr>
+          <td colspan="20" align="center" bgcolor="green" height="40" style="color:white">
+          <div class="alert alert-success" role="alert"><h4>*********검색하기*********</h4></div>
+            
+          </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="green"><div class="p-1 mb-1 bg-success text-white"><h4>날짜선택</h4></div></td>
+          <td>
+            <select class="form-control" name="ye">
+              {% for i in YE %}
+              <option values="">{{i}}</option>
+              {% endfor %}	
+          <td></select> 년</td>
+          </td>
+          
+          <td>
+            <select class="form-control" name="mo">
+              {% for i in MO %}
+              <option values="">{{i}}</option>
+              {% endfor %}	
+          <td></select>월</td>
+          </td>
+          <td>  
+            <select class="form-control" name="da">
+              {% for i in DA %}
+              <option values="">{{i}}</option>
+              {% endfor %}
+          <td></select > 일</td>
+          </td>
+          <td>
+            <select class="form-control" name="ti">
+              {% for i in TI %}
+              <option values="">{{i}}</option>
+              {% endfor %}
+          <td></select> 시</td>
+          </td>
+          <td><input type="submit" class="btn btn-secondary" value="검색"/><td>
+        </tr> 
+      </table>
+  </form>
+</div>  
 
 
 
-    <form action='/board/list' method='get'>
-        <input type='submit' value='list' />
-    </form>
+<div class="container-fluid">
+  <div class="row">
+
+      <div class="col-sm">
+        <table class="table table-sm">
+          <tr>
+            <td colspan="3"><h3>10대</h3></td>
+          </tr>
+          <tr>
+            <!--10-->
+            <th scope="col" width="60px">순위</th>
+            <th scope="col">　　　　검색어</th>
+            <th scope="col" width="60px">시간대</th>
+          </tr>
+
+          {% for i in kk %}
+          <tr>
+            <td>{{i.0.0}}</td>
+            <td>{{i.0.1}}</td>
+            <td>{{i.0.2}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+
+      <div class="col-sm">
+        <table class="table table-sm">
+          <tr>
+            <td colspan="3"><h3>20대</h3></td>
+          </tr>
+          <tr>
+            <!--20-->
+            <th scope="col" width="60px">순위</th>
+            <th scope="col">　　　　검색어</th>
+            <th scope="col" width="60px">시간대</th>
+          </tr>
+
+          {% for i in kk %}
+          <tr>
+              <td>{{i.1.0}}</td>
+              <td>{{i.1.1}}</td>
+              <td>{{i.1.2}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+
+      <div class="col-sm">
+        <table class="table table-sm">
+          <tr>
+          <tr>
+            <td colspan="3"><h3>30대</h3></td>
+          </tr>
+            <!--30-->
+            <th scope="col" width="60px">순위</th>
+            <th scope="col">　　　　검색어</th>
+            <th scope="col" width="60px">시간대</th>
+          </tr>
+
+          {% for i in kk %}
+          <tr>
+              <td>{{i.2.0}}</td>
+              <td>{{i.2.1}}</td>
+              <td>{{i.2.2}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    
+        <div class="col-sm">
+          <table class="table table-sm">
+            <tr>
+          <tr>
+            <td colspan="3"><h3>40대</h3></td>
+          </tr>            
+            <!--40-->
+            <th scope="col" width="60px">순위</th>
+            <th scope="col">　　　　검색어</th>
+            <th scope="col" width="60px">시간대</th>
+          </tr>
+
+          {% for i in kk %}
+          <tr>
+              <td>{{i.3.0}}</td>
+              <td>{{i.3.1}}</td>
+              <td>{{i.3.2}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    
+        <div class="col-sm">
+          <table class="table table-sm">
+          <tr>
+            <td colspan="3"><h3>50대</h3></td>
+          </tr>            
+            <tr>
+            <!--50-->
+            <th scope="col" width="60px">순위</th>
+            <th scope="col">　　　　검색어</th>
+            <th scope="col" width="60px">시간대</th>
+          </tr>
+
+          {% for i in kk %}
+          <tr>
+              <td>{{i.4.0}}</td>
+              <td>{{i.4.1}}</td>
+              <td>{{i.4.2}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+
+
+    
+    </div>
+</div>
+
 </body>
 </html>

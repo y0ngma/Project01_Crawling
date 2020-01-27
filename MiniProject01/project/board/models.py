@@ -14,3 +14,12 @@ class board1(models.Model):
     day   = models.IntegerField()
     time  = models.IntegerField()
     
+    
+
+class Table1(models.Model):
+    objects =  models.Manager()  #vs code 오류 제거용
+
+    no = models.AutoField(primary_key=True)
+    title =models.CharField(max_length=200)
+    content=models.TextField()
+    writer=models.CharField(max_length=50)

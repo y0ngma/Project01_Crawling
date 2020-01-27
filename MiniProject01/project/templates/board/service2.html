@@ -1,0 +1,197 @@
+{% include './header.html' %}
+<body>
+{% include './menu.html' %}
+
+
+  <main role="main">
+
+    <div class="jumbotron">
+      <div class="container">
+        <div class="container" style="border:1px solid #ff0000">
+            <div style="border:1px solid #ffffff;">
+                <input type="button" id="btn_add" value="검색어 추가하기" style="WIDTH: 160pt; HEIGHT: 20pt"/><br>
+                <form action='/board/service2' method='GET'>
+                    <div id="form"></div>
+                    <input type="submit" value="검색하기" style='WIDTH: 160pt; HEIGHT: 20pt' >
+                </form>
+
+                <br>
+
+
+                {% if data %}
+                <button type="button" class="btn btn-info      btn-sm">{{data.8.0}} </button>
+                <button type="button" class="btn btn-primary   btn-sm">{{data.0.0}} </button>
+                <button type="button" class="btn btn-secondary btn-sm">{{data.1.0}} </button>
+                <button type="button" class="btn btn-success   btn-sm">{{data.2.0}} </button>
+                <button type="button" class="btn btn-danger    btn-sm">{{data.3.0}} </button>
+                <button type="button" class="btn btn-warning   btn-sm">{{data.4.0}} </button>
+                <button type="button" class="btn btn-info      btn-sm">{{data.5.0}} </button>
+                <button type="button" class="btn btn-light     btn-sm">{{data.6.0}} </button>
+                <button type="button" class="btn btn-dark      btn-sm">{{data.7.0}} </button>
+                <button type="button" class="btn btn-secondary btn-sm">{{data.9.0}} </button>
+                등을 검색하세요
+                {% else %}
+                    {{date.0.0}} 의 {{date.0.6}} 추세입니다.
+                {% endif %}
+
+                
+                
+                <div id="chart"></div>    
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+    <script>
+
+        $(function(){
+            var idx = 0;
+            $('#btn_add').click(function(){
+                idx += 1
+
+                $('#form').append(
+                    "<div id='div_"+ idx +"'>" +
+                    "검색어 : "+
+                    "<input type='text' style = 'width:260px;' name='search"+ idx +"' ><br>" +
+                    "연령 선택 : "+
+                    "<select style='WIDTH: 260px; HEIGHT: 30px' name='age"+ idx +"'>" +                    
+                        "<option value='' selected>-- 선택 --</option>" +                    
+                        "<option value='10대'>10대</option>" +                    
+                        "<option value='20대'>20대</option>" +                    
+                        "<option value='30대'>30대</option>" +                    
+                        "<option value='40대'>40대</option>" +                    
+                        "<option value='50대 이상'>50대이상</option>" +                    
+                    "</select><br>"+
+                    "<input type='button' myval='" + idx + "' value='delete' class='btn_delete' /><br>" +
+                    "<br />"  +
+                    "<div>"
+                )           
+            });
+
+            $(document).on("click",".btn_delete",function() {
+                var idx = $(this).attr('myval')
+                $('#div_'+idx).empty()
+            });
+        })
+
+
+        var str1 = '{{data1}}'
+        var str2 = '{{data2}}'
+
+        var str_xs = null
+        var arr_cl = null
+
+        if (str1 != "" && str2 != ""){
+            str1 = str1.replace(/&#x27;/gi, "'");
+            var objx = eval(str1)  //문자열로 [1,2,3,4]  => javascript배열로변경
+            objx.unshift('x');     //['x',1,2,3,4]
+            console.log(objx)
+
+            var objy = eval(str2)
+            objy.unshift('rank');
+            console.log(objy)
+
+            //1개
+            str_xs = {'rank': 'x' }
+            arr_cl = [objy, objx]
+        }
+        //////////////////////////////////////////////////////
+        var str3 = '{{data3}}'
+        var str4 = '{{data4}}'
+
+        if(str3 != "" && str4 != ""){
+            str3 = str3.replace(/&#x27;/gi, "'");
+            var objx1 = eval(str3)  //문자열로 [1,2,3,4]  => javascript배열로변경
+            objx1.unshift('x1');     //['x',1,2,3,4]
+            console.log(objx1)
+
+            var objy1 = eval(str4)
+            objy1.unshift('rank1');
+            console.log(objy1)
+
+            //2개
+            str_xs = {'rank': 'x', 'rank1': 'x1' }
+            arr_cl = [objy, objy1, objx, objx1]
+        }
+        //////////////////////////////////////////////////////////////////////////
+
+        var str5 = '{{data5}}'
+        var str6 = '{{data6}}'
+
+        if(str5 != "" && str6 != ""){
+            str5 = str5.replace(/&#x27;/gi, "'");
+            var objx2 = eval(str5)  //문자열로 [1,2,3,4]  => javascript배열로변경
+            objx2.unshift('x2');     //['x',1,2,3,4]
+            console.log(objx2)
+
+            var objy2 = eval(str6)
+            objy2.unshift('rank2');
+            console.log(objy2)
+            str_xs = {'rank': 'x', 'rank1': 'x1',  'rank2': 'x2' }
+            arr_cl = [objy,  objy1,            objy2,            objx,            objx1,            objx2]
+        }
+
+        /////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////
+        var chart = c3.generate({
+            bindto: '#chart',
+            //////////////////////////////////////////////////////////////////////////
+            data: {
+                xs: str_xs,
+                columns: arr_cl
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    
+                    tick: {
+                        format: '%Y-%m-%d'
+                    },
+                    rank:{
+                        reversed:true
+                    } 
+                }
+            }
+        });
+        /*
+        var chart = c3.generate({
+            bindto: '#chart',
+            //////////////////////////////////////////////////////////////////////////
+            data: {
+                xs: {
+                    'rank': 'x',
+                    'rank1': 'x1',
+                    'rank2': 'x2'
+                },
+                columns: [
+                    objy,
+                    objy1,
+                    objy2,
+                    objx,
+                    objx1,
+                    objx2
+                ]
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    
+                    tick: {
+                        format: '%Y-%m-%d'
+                    },
+                    rank:{
+                        reversed:true
+                    } 
+                }
+            }
+        });
+        */
+    </script>
+    
+
+</body>
+
+</html>
+
