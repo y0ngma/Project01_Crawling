@@ -374,27 +374,50 @@ def service3(request):
         ranking4=list()
         word5=list()
         ranking5=list()
-        word1.append(filtered[0][0])
-        ranking1.append(filtered[0][1])
-        
-        word2.append(filtered[1][0])
-        ranking2.append(filtered[1][1])
-        
-        word3.append(filtered[2][0])
-        ranking3.append(filtered[2][1])
-        
-        word4.append(filtered[3][0])
-        ranking4.append(filtered[3][1])
-        
-        word5.append(filtered[4][0])
-        ranking5.append(filtered[4][1])
-        
-        return render(request,'board/service3.html',{'GN':GN,'MM':MM,\
+        print()
+
+        if(len(filtered)>=5):
+            word1.append(filtered[0][0])
+            ranking1.append(filtered[0][1])
+            
+            word2.append(filtered[1][0])
+            ranking2.append(filtered[1][1])
+            
+            word3.append(filtered[2][0])
+            ranking3.append(filtered[2][1])
+            
+            word4.append(filtered[3][0])
+            ranking4.append(filtered[3][1])
+            
+            word5.append(filtered[4][0])
+            ranking5.append(filtered[4][1])
+
+            return render(request,'board/service3.html',{'GN':GN,'MM':MM,\
+                "DD":DD,"SS":SS,"RK":RK,'filtered':filtered,\
+                "word1":word1,"rank1":ranking1,"word2":word2,"rank2":ranking2,\
+                "word3":word3,"rank3":ranking3,"word4":word4,"rank4":ranking4,\
+                "word5":word5,"rank5":ranking5})
+    
+    # 그래프에 표시할 검색어가 5개 미만으로 필터링 되었을경우 그래프에 넣을 데이터 None
+        else:
+            return render(request,'board/service3.html',{'GN':GN,'MM':MM,\
             "DD":DD,"SS":SS,"RK":RK,'filtered':filtered,\
-            "word1":word1,"rank1":ranking1,"word2":word2,"rank2":ranking2,\
-            "word3":word3,"rank3":ranking3,"word4":word4,"rank4":ranking4,\
-            "word5":word5,"rank5":ranking5})
+            "word1":None,"rank1":None,"word2":None,"rank2":None,\
+            "word3":None,"rank3":None,"word4":None,"rank4":None,\
+            "word5":None,"rank5":None})          
+
+    # 댓글입력
+    elif request.method=='POST':
+        arr=[request.POST['title'],request.POST['content'],request.POST['writer']]
+        print(arr)
+        sql="""
+            INSERT INTO BOARD_TABLE3(TITLE, CONTENT, WRITER)
+            VALUES(%s, %s, %s)
+        """
+        cursor.execute(sql, arr)
+        return redirect("/board/service3")
    
+
 
 @csrf_exempt
 def service4(request): # 검색어 최초검색된 날짜, 최종일
