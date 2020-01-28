@@ -25,7 +25,10 @@ SECRET_KEY = 'ffns$s4nf@v3@1pzoaw+-$8d_5-!e(d2!6)+4q9t4q51sw2jf3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] # *모든사람이 접속 가능하게
+# @cmd 다음 입력
+# python manage.py runserver 192.168.0.주소:8000 (내주소)
+# 접속하고자 하는 192.168.0.주소:8000를 인터넷에 입력하여 접속
 
 
 # Application definition
