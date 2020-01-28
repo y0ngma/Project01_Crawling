@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
-from.models import board1
-from.models import Table1
+from .models import board1
+from .models import Table3, Table4
 from django.db.models import Sum, Max, Min, Count, Avg
 import pandas as pd
 import random
